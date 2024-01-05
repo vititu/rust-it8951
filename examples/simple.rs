@@ -33,6 +33,7 @@ fn main() -> anyhow::Result<()> {
     // 6: DU4: 4 gray times
     // 7: A2: 2 bit pictures
 
+    it8951.clear_display()?;
     it8951.update_region(&grayscale_image, 0, 0, Mode::GC16)?;
     println!("End");
     Ok(())

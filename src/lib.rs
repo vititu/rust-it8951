@@ -257,4 +257,20 @@ impl It8951 {
         })?;
         Ok(())
     }
+
+    pub fn clear_display(&mut self) -> Result<()> {
+        let system_info = self.get_system_info().expect("Could not get system info");
+
+        self.dpy_area(DisplayArea {
+            address: 0x00,
+            display_mode: Mode::INIT,
+            x: 0,
+            y: 0,
+            w: system_info.width,
+            h: system_info.height,
+            wait_ready: 1,
+        })?;
+
+        Ok(())
+    }
 }
