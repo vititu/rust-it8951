@@ -1,5 +1,4 @@
 use bincode::config::Options;
-use image::GenericImageView;
 use rusb::open_device_with_vid_pid;
 use rusb::{DeviceHandle, GlobalContext, Result};
 use serde::{Deserialize, Serialize};
@@ -211,15 +210,8 @@ impl It8951 {
     }
 
     /// Update region of e-paper display.
-    pub fn update_region(
-        &mut self,
-        image: &image::DynamicImage,
-        x: u32,
-        y: u32,
-        mode: Mode,
-    ) -> Result<()> {
-        let data = image.as_bytes();
-        let (width, height) = image.dimensions();
+    pub fn update_region(&mut self, data: &[u8], x: u32, y: u32, mode: Mode) -> Result<()> {
+        let (width, height) = (1200, 825);
 
         let w: usize = width as usize;
         let h: usize = height as usize;
